@@ -22,7 +22,7 @@
      Layout, type and components follow the Regen candidacy funnel template (Newsreader headings, Public Sans
      body, IBM Plex Mono for numbers and captions). Colors stay NOVA's: navy and blue from the logo file.
      The template's warm amber button is the Option A block in design/tokens.css (Vijay chose blue, 2026-10-28). */
-  #nova-lp, #nova-modal, #nova-bar {
+  #nova-lp, #nova-bar {
     --canvas: #F5F8FB;
     --canvas-alt: #E7EFF8;
     --surface: #FAFCFE;
@@ -73,7 +73,6 @@
     background: var(--canvas);
   }
   #nova-lp *, #nova-lp *::before, #nova-lp *::after,
-  #nova-modal *, #nova-modal *::before, #nova-modal *::after,
   #nova-bar *, #nova-bar *::before, #nova-bar *::after { box-sizing: border-box; }
   #nova-lp h1, #nova-lp h2, #nova-lp h3, #nova-lp p, #nova-lp ul, #nova-lp ol, #nova-lp figure, #nova-lp blockquote { margin: 0; padding: 0; }
   #nova-lp ul, #nova-lp ol { list-style: none; }
@@ -82,7 +81,7 @@
   #nova-lp img { display: block; max-width: 100%; height: auto; }
   #nova-lp a { color: var(--navy); }
   #nova-lp a:hover { color: var(--ink); }
-  #nova-lp :focus-visible, #nova-modal :focus-visible, #nova-bar :focus-visible {
+  #nova-lp :focus-visible, #nova-bar :focus-visible {
     outline: 3px solid var(--navy);
     outline-offset: 3px;
   }
@@ -176,7 +175,7 @@
   #nova-lp .nv-logo { display: flex; align-items: center; min-height: 44px; }
   #nova-lp .nv-logo img { height: 34px; width: auto; }
   /* inline phone links: 44px tap area without changing the line height */
-  #nova-lp .nv-call-line a, #nova-lp .nv-footer a[data-nv-phone], #nova-lp .nv-small a[data-nv-phone], #nova-modal .nv-modal-foot a { display: inline-block; padding: 13px 0; margin: -13px 0; }
+  #nova-lp .nv-call-line a, #nova-lp .nv-footer a[data-nv-phone], #nova-lp .nv-small a[data-nv-phone] { display: inline-block; padding: 13px 0; margin: -13px 0; }
   #nova-lp .nv-small a[data-nv-phone] { white-space: nowrap; }
   #nova-lp .nv-header-right { display: flex; align-items: center; gap: clamp(8px, 2vw, 24px); }
   #nova-lp .nv-header .nv-btn { min-height: 46px; padding: 0 20px; font-size: 16px; }
@@ -219,17 +218,20 @@
     mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
   }
   #nova-lp .nv-hero-art img { display: block; width: 100%; height: auto; }
-  #nova-lp .nv-hero-grid { align-items: center; }
+  /* top-aligned: the survey changes height as it moves through the questions, and the copy beside it should not move */
+  #nova-lp .nv-hero-grid { align-items: start; }
+  /* GHL lays the answers out in two columns once its frame is 600px wide, so wide screens give the survey that much */
+  @media (min-width: 1100px) {
+    #nova-lp .nv-hero-grid { grid-template-columns: minmax(0, 1fr) 580px; column-gap: clamp(40px, 4vw, 64px); }
+    #nova-lp .nv-hero-grid > .c7, #nova-lp .nv-hero-grid > .c5 { grid-column: auto; }
+    #nova-lp .nv-hero-grid .nv-survey-embed { margin-top: 0; scroll-margin-top: calc(var(--header-h) + 24px); }
+    #nova-lp .nv-hero-grid .nv-survey-embed + .nv-survey-note { margin-top: -32px; }
+    /* the survey covers the right side here, so the anatomy sits between the copy and the survey */
+    #nova-lp .nv-hero-art { right: auto; left: calc(50% - 330px); width: 600px; opacity: .14; }
+  }
   #nova-lp .nv-hero .nv-eyebrow { color: var(--navy-2); }
   #nova-lp .nv-hero h1 { color: var(--navy); font-size: clamp(40px, 2.4vw + 24px, 60px); }
   #nova-lp .nv-hero .nv-lede { margin-top: 20px; }
-  #nova-lp .nv-hero .nv-survey {
-    background: rgba(250, 252, 254, .84);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-color: rgba(0, 52, 127, .16);
-    box-shadow: 0 28px 60px -30px rgba(0, 52, 127, .5);
-  }
 
   /* media: Dr. Chenthitta's portrait now, his video later (16:9, rounded, never autoplays) */
   #nova-lp .nv-media { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius-card); overflow: hidden; background: var(--navy); }
@@ -247,58 +249,28 @@
     font: 600 13px/1.3 var(--body);
   }
 
-  /* the survey card: question 1 of the real survey (a tap opens the popup survey) */
-  #nova-lp .nv-survey {
-    background: var(--surface);
-    border: 1px solid var(--hairline-strong);
-    border-radius: var(--radius-card);
-    padding: clamp(20px, 3vw, 32px);
-  }
-  #nova-lp .nv-progress { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-family: var(--mono); font-size: 13px; color: var(--ink-2); }
-  #nova-lp .nv-dots { display: flex; gap: 5px; }
-  #nova-lp .nv-dots i { width: 18px; height: 4px; border-radius: 2px; background: var(--hairline-strong); }
-  #nova-lp .nv-dots i.on { background: var(--navy); }
-  #nova-lp .nv-q {
-    margin-top: 14px;
-    font-family: var(--body);
-    font-weight: 600;
-    font-size: 21px;
-    line-height: 1.3;
-  }
-  #nova-lp .nv-answers { margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  #nova-lp .nv-answer {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    min-height: 54px;
-    padding: 12px 16px;
-    border: 1px solid var(--hairline-field);
-    border-radius: var(--radius-btn);
-    background: var(--canvas);
-    color: var(--ink);
-    font: 400 16px/1.35 var(--body);
-    text-align: left;
-    cursor: pointer;
-    transition: border-color 150ms ease-out, background-color 150ms ease-out;
-    -webkit-tap-highlight-color: transparent;
-  }
-  #nova-lp .nv-answer:hover { border-color: var(--navy); background: var(--canvas-alt); }
-  #nova-lp .nv-box {
-    width: 20px;
-    height: 20px;
-    flex: none;
+  /* the survey: GHL's own iframe, which GHL's form_embed.js resizes as the questions change */
+  /* GHL draws its card 20px in from each side of its frame (plus 40px on top when the frame is under 600px wide)
+     and leaves empty space under it, so the frame reaches past the column and the card lines up with the copy */
+  #nova-lp .nv-survey-embed { position: relative; margin: -40px -20px 0; scroll-margin-top: calc(var(--header-h) - 40px); }
+  #nova-lp .nv-survey-embed + .nv-survey-note { margin-top: -64px; }
+  #nova-lp .nv-survey-embed:focus { outline: none; }
+  #nova-lp .nv-form-slot { min-height: 420px; }
+  #nova-lp .nv-form-slot iframe { display: block; width: 100%; min-height: 420px; border: 0; background: transparent; }
+  #nova-lp .nv-form-placeholder {
+    min-height: 420px;
     display: grid;
-    place-items: center;
-    border: 1.5px solid rgba(18, 35, 57, .5);
-    border-radius: 4px;
-    background: var(--surface);
-    color: #fff;
+    place-content: center;
+    gap: 8px;
+    padding: 24px;
+    border: 1.5px dashed var(--hairline-strong);
+    border-radius: var(--radius-card);
+    background: rgba(250, 252, 254, .84);
+    text-align: center;
+    font-size: 15px;
+    color: var(--ink-2);
   }
-  #nova-lp .nv-box .nv-ico { width: 14px; height: 14px; stroke-width: 3; opacity: 0; }
-  #nova-lp .nv-answer[aria-pressed="true"] { border-color: var(--navy); background: var(--select); box-shadow: inset 0 0 0 1px var(--navy); }
-  #nova-lp .nv-answer[aria-pressed="true"] .nv-box { background: var(--navy); border-color: var(--navy); }
-  #nova-lp .nv-answer[aria-pressed="true"] .nv-box .nv-ico { opacity: 1; }
+  #nova-lp .nv-form-placeholder b { font-size: 17px; color: var(--ink); }
   #nova-lp .nv-survey-note { margin-top: 18px; font-size: 15.5px; line-height: 1.5; color: var(--ink-2); }
   #nova-lp .nv-call-line { margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--ink-2); }
   #nova-lp .nv-call-line a { font-weight: 600; white-space: nowrap; }
@@ -390,10 +362,10 @@
   #nova-lp .nv-reviews .nv-results { margin-top: 18px; }
 
   /* ===== 7. CHECK ===== */
-  #nova-lp .nv-check { border-top: 1px solid var(--hairline); scroll-margin-top: var(--header-h); }
+  #nova-lp .nv-check { border-top: 1px solid var(--hairline); }
   #nova-lp .nv-check .nv-grid { align-items: start; }
   #nova-lp .nv-check .nv-lede { margin-top: 16px; }
-  #nova-lp .nv-check .nv-survey { margin-top: 32px; }
+  #nova-lp .nv-check .nv-btn { margin-top: 28px; }
   #nova-lp .nv-amy { padding-top: 8px; }
   #nova-lp .nv-amy .nv-rows { margin-top: 16px; }
   #nova-lp .nv-amy .nv-rows li { color: var(--ink-2); }
@@ -462,71 +434,6 @@
   #nova-bar { transition: transform 200ms ease; }
   #nova-bar.is-off { transform: translateY(110%); }
 
-  /* ===== POPUP (moved to <body> by the script) ===== */
-  #nova-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 2147483000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 24px 16px;
-    background: rgba(18, 35, 57, .55);
-  }
-  #nova-modal.is-open { display: flex; }
-  #nova-modal .nv-modal-panel {
-    position: relative;
-    width: 100%;
-    max-width: 620px;
-    max-height: calc(100vh - 48px);
-    max-height: calc(100dvh - 48px);
-    display: flex;
-    flex-direction: column;
-    background: var(--surface);
-    border-radius: var(--radius-card);
-    box-shadow: 0 24px 64px rgba(18, 35, 57, .3);
-    overflow: hidden;
-  }
-  #nova-modal .nv-modal-head { padding: 20px 64px 16px 24px; border-bottom: 1px solid var(--hairline); }
-  #nova-modal .nv-modal-kicker { font: 600 12px/1.4 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
-  #nova-modal .nv-modal-title { margin: 4px 0 0; font: 500 26px/1.2 var(--display); color: var(--ink); }
-  #nova-modal .nv-modal-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 44px;
-    height: 44px;
-    display: grid;
-    place-items: center;
-    border: 0;
-    border-radius: 50%;
-    background: transparent;
-    color: var(--ink);
-    cursor: pointer;
-  }
-  #nova-modal .nv-modal-close:hover { background: var(--canvas-alt); }
-  #nova-modal .nv-modal-close .nv-ico { width: 22px; height: 22px; stroke-width: 2; }
-  #nova-modal .nv-modal-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-  #nova-modal .nv-form-slot { min-height: 420px; }
-  #nova-modal .nv-form-slot iframe { width: 100%; min-height: 560px; border: 0; display: block; }
-  #nova-modal .nv-form-placeholder {
-    margin: 24px;
-    min-height: 372px;
-    display: grid;
-    place-content: center;
-    gap: 8px;
-    padding: 24px;
-    border: 1.5px dashed var(--hairline-strong);
-    border-radius: var(--radius-card);
-    text-align: center;
-    font-size: 15px;
-    color: var(--ink-2);
-  }
-  #nova-modal .nv-form-placeholder b { font-size: 17px; color: var(--ink); }
-  #nova-modal .nv-modal-foot { padding: 14px 24px; border-top: 1px solid var(--hairline); font-size: 15px; color: var(--ink-2); }
-  #nova-modal .nv-modal-foot a { color: var(--navy); font-weight: 600; white-space: nowrap; }
-  body.nv-lock { overflow: hidden; }
-  body.nv-lock #nova-bar { display: none; }
 
   /* ===================================================================
      FUNNEL PAGES: thank-you, not-a-fit, pre-evaluation
@@ -793,6 +700,7 @@
     #nova-lp .nv-hero-copy { display: contents; }
     #nova-lp .nv-hero-grid > *, #nova-lp .nv-hero-copy > * { grid-column: 1 / -1; }
     #nova-lp .nv-hero-grid .nv-media--sm { order: 1; max-width: none; }
+    #nova-lp .nv-survey-embed { margin-left: -16px; margin-right: -16px; }
     #nova-lp .nv-hero-art { width: min(78vw, 420px); right: -14vw; top: 24px; opacity: .1; }
     #nova-lp .nv-problem .nv-rows, #nova-lp .nv-faq .nv-acc { margin-top: 28px; }
     #nova-lp .nv-days-top .c5 { margin-top: 28px; }
@@ -829,6 +737,7 @@
     #nova-lp .nv-header .nv-btn, #nova-lp .nv-phone span { display: none; }
     #nova-lp .nv-phone { border-radius: 50%; background: var(--canvas-alt); }
     #nova-lp .nv-logo img { height: 28px; }
+    #nova-lp .nv-header--form .nv-btn { display: inline-flex; min-height: 44px; padding: 0 14px; font-size: 15px; white-space: nowrap; }
     #nova-lp .nv-eyebrow .nv-sep { display: none; }
     #nova-lp .nv-eyebrow .nv-place { display: block; }
     #nova-lp .nv-trust li { font-size: 14.5px; }
@@ -868,11 +777,9 @@
     #nova-lp .nv-bento:has(.nv-pvid) .nv-bento-revs { margin-top: 12px; }
     #nova-lp .nv-bento-vids > *, #nova-lp .nv-bento:has(.nv-pvid) .nv-review, #nova-lp .nv-bento--swipe .nv-review, #nova-lp .nv-pvids > * { flex: 0 0 84%; scroll-snap-align: start; }
     #nova-lp .nv-bento .nv-pvid--1 .nv-video { aspect-ratio: 16 / 9; }
-    #nova-lp .nv-answers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    #nova-lp .nv-answer { font-size: 15px; padding: 10px 12px; gap: 10px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    #nova-lp *, #nova-modal *, #nova-bar { transition: none !important; }
+    #nova-lp *, #nova-bar { transition: none !important; }
   }
 </style>
 
