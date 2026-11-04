@@ -196,14 +196,56 @@
   }
   #nova-lp .nv-phone:hover { color: var(--navy); }
 
-  /* ===== 1. HERO ===== */
-  #nova-lp .nv-hero { padding: clamp(36px, 5vw, 64px) 0 0; }
+  /* ===== 1. HERO: blue-tinted band, the anatomy faint behind it, the survey card beside the headline ===== */
+  #nova-lp .nv-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding: clamp(36px, 5vw, 64px) 0 0;
+    background:
+      radial-gradient(900px 560px at 80% 30%, rgba(22, 103, 196, .16), rgba(22, 103, 196, 0) 70%),
+      radial-gradient(700px 420px at 8% 0%, rgba(0, 170, 255, .10), rgba(0, 170, 255, 0) 70%),
+      linear-gradient(180deg, #E2ECF8 0%, #EDF3FA 60%, var(--canvas) 100%);
+  }
+  #nova-lp .nv-hero-art {
+    position: absolute;
+    z-index: -1;
+    top: clamp(12px, 2vw, 32px);
+    right: max(-40px, calc(50% - 760px));
+    width: clamp(340px, 42vw, 620px);
+    opacity: .16;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+  }
+  #nova-lp .nv-hero-art img { display: block; width: 100%; height: auto; }
+  #nova-lp .nv-hero-grid { align-items: center; }
+  #nova-lp .nv-hero .nv-eyebrow { color: var(--navy-2); }
+  #nova-lp .nv-hero h1 { color: var(--navy); font-size: clamp(40px, 2.4vw + 24px, 60px); }
   #nova-lp .nv-hero .nv-lede { margin-top: 20px; }
-  #nova-lp .nv-hero-grid { margin-top: clamp(28px, 4vw, 44px); align-items: start; }
+  #nova-lp .nv-hero .nv-survey {
+    background: rgba(250, 252, 254, .84);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-color: rgba(0, 52, 127, .16);
+    box-shadow: 0 28px 60px -30px rgba(0, 52, 127, .5);
+  }
 
   /* media: Dr. Chenthitta's portrait now, his video later (16:9, rounded, never autoplays) */
   #nova-lp .nv-media { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius-card); overflow: hidden; background: var(--navy); }
   #nova-lp .nv-media > img, #nova-lp .nv-media picture, #nova-lp .nv-media picture img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
+  #nova-lp .nv-media--sm { margin-top: 28px; max-width: 420px; aspect-ratio: 3 / 2; box-shadow: 0 18px 40px -20px rgba(0, 52, 127, .45); }
+  #nova-lp .nv-media--sm picture img { object-position: 80% 20%; }
+  #nova-lp .nv-media-tag {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background: rgba(0, 52, 127, .86);
+    color: #FFFFFF;
+    font: 600 13px/1.3 var(--body);
+  }
 
   /* the survey card: question 1 of the real survey (a tap opens the popup survey) */
   #nova-lp .nv-survey {
@@ -747,6 +789,11 @@
     #nova-lp .nv-jump .nv-wrap { -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); mask-image: linear-gradient(to right, #000 88%, transparent); }
     #nova-lp .nv-grid > [class^="c"], #nova-lp .nv-grid > [class*=" c"] { grid-column: 1 / -1; }
     #nova-lp .nv-hero-grid .c5 { margin-top: 28px; }
+    /* phones and tablets: the first question comes right after the lede, the doctor's photo after it */
+    #nova-lp .nv-hero-copy { display: contents; }
+    #nova-lp .nv-hero-grid > *, #nova-lp .nv-hero-copy > * { grid-column: 1 / -1; }
+    #nova-lp .nv-hero-grid .nv-media--sm { order: 1; max-width: none; }
+    #nova-lp .nv-hero-art { width: min(78vw, 420px); right: -14vw; top: 24px; opacity: .1; }
     #nova-lp .nv-problem .nv-rows, #nova-lp .nv-faq .nv-acc { margin-top: 28px; }
     #nova-lp .nv-days-top .c5 { margin-top: 28px; }
     #nova-lp .nv-steps { grid-template-columns: 1fr; }
@@ -880,18 +927,24 @@
   <main id="top">
 
         <section class="nv-hero">
+      <div class="nv-hero-art" aria-hidden="true">
+        <picture>
+          <source type="image/webp" srcset="../img/hero-anatomy.webp">
+          <img src="../img/hero-anatomy.png" width="640" height="756" alt="" loading="eager">
+        </picture>
+      </div>
       <div class="nv-wrap">
-        <p class="nv-eyebrow">Regenerative joint and spine treatment<span class="nv-sep" aria-hidden="true"> &middot; </span><span class="nv-place">Lansdowne, VA</span></p>
-        <h1>Relief from joint and back pain, without surgery.</h1>
-        <p class="nv-lede">For active adults who've already tried physical therapy and shots. Answer a few questions to see if you're likely a candidate for non-surgical treatment with Dr. Anil Chenthitta.</p>
-
         <div class="nv-grid nv-hero-grid">
-          <div class="c7">
-            <figure class="nv-media">
+          <div class="c7 nv-hero-copy">
+            <p class="nv-eyebrow">Regenerative joint and spine treatment<span class="nv-sep" aria-hidden="true"> &middot; </span><span class="nv-place">Lansdowne, VA</span></p>
+            <h1>Relief from joint and back pain, without surgery.</h1>
+            <p class="nv-lede">For active adults who've already tried physical therapy and shots. Answer a few questions to see if you're likely a candidate for non-surgical treatment with Dr. Anil Chenthitta.</p>
+            <figure class="nv-media nv-media--sm">
               <picture>
                 <source type="image/webp" srcset="../img/hero-dr-chenthitta.webp">
-                <img src="../img/hero-dr-chenthitta.jpg" width="1600" height="900" alt="Dr. Anil Chenthitta" fetchpriority="high">
+                <img src="../img/hero-dr-chenthitta.jpg" width="1600" height="900" alt="Dr. Anil Chenthitta, NOVA Interventional Pain & Spine" fetchpriority="high">
               </picture>
+              <figcaption class="nv-media-tag">Dr. Anil Chenthitta</figcaption>
             </figure>
           </div>
           <div class="c5">
@@ -1232,7 +1285,7 @@
 (function () {
   // GHL survey link and (optional) its question 1 parameter. GHL fails silently,
   // so test the question 1 prefill with a real submission before relying on it.
-  var NOVA_FORM_URL = '';
+  var NOVA_FORM_URL = 'https://api.leadconnectorhq.com/widget/survey/aHf6UOXXtycGIVMwr4nO';
   var NOVA_Q1_PARAM = '';
 
   var N = window.NOVA;
