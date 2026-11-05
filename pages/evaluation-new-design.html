@@ -14,7 +14,7 @@
 <body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   html, body { overflow-x: clip; }
 
@@ -832,7 +832,7 @@
   /* hero: no gradient or anatomy, headline and doctor strip on the left, the survey under its own heading on the right */
   #nova-lp.nv-v2 .nv-hero { padding-top: clamp(48px, 6vw, 88px); }
   #nova-lp.nv-v2 .nv-hero .nv-eyebrow { color: var(--blue); }
-  #nova-lp.nv-v2 .nv-hero h1 { color: var(--navy); font-size: clamp(36px, 1.8vw + 24px, 52px); line-height: 1.12; letter-spacing: -0.02em; max-width: 19ch; }
+  #nova-lp.nv-v2 .nv-hero h1 { color: var(--navy); font-weight: 800; font-size: clamp(36px, 1.8vw + 24px, 52px); line-height: 1.12; letter-spacing: -0.025em; max-width: 19ch; }
 
   /* problem: the full-body image fills the space under the heading */
   #nova-lp.nv-v2 .nv-problem-art { margin-top: 32px; max-width: 480px; border-radius: var(--radius-card); overflow: hidden; background: #E9EFF5; }
@@ -854,6 +854,23 @@
     #nova-lp.nv-v2 .nv-pin:nth-of-type(3) { animation-delay: 1.2s; }
     #nova-lp.nv-v2 .nv-pin:nth-of-type(4) { animation-delay: 1.8s; }
   }
+  /* joint names with an arrow to each marker */
+  #nova-lp.nv-v2 .nv-callout { position: absolute; display: flex; align-items: center; white-space: nowrap; pointer-events: none; }
+  #nova-lp.nv-v2 .nv-callout--l { transform: translate(calc(-100% - 12px), -50%); }
+  #nova-lp.nv-v2 .nv-callout--r { flex-direction: row-reverse; transform: translate(12px, -50%); }
+  #nova-lp.nv-v2 .nv-callout b {
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 10px rgba(0, 52, 127, .16);
+    font: 700 13px/1.1 var(--body);
+    letter-spacing: .02em;
+    color: var(--navy);
+  }
+  #nova-lp.nv-v2 .nv-callout i { position: relative; display: block; width: 36px; height: 2px; background: var(--navy); }
+  #nova-lp.nv-v2 .nv-callout i::after { content: ''; position: absolute; top: 50%; transform: translateY(-50%); border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+  #nova-lp.nv-v2 .nv-callout--l i::after { right: -2px; border-left: 8px solid var(--navy); }
+  #nova-lp.nv-v2 .nv-callout--r i::after { left: -2px; border-right: 8px solid var(--navy); }
   @keyframes nv-pin {
     0% { box-shadow: 0 0 0 0 rgba(22, 103, 196, .35); }
     70%, 100% { box-shadow: 0 0 0 12px rgba(22, 103, 196, 0); }
@@ -973,6 +990,10 @@
     #nova-lp.nv-v2 .nv-docstrip-t { font-size: 15px; }
     #nova-lp.nv-v2 .nv-docstrip-d { font-size: 13.5px; }
     #nova-lp.nv-v2 .nv-pin { width: 11px; height: 11px; }
+    #nova-lp.nv-v2 .nv-callout b { padding: 5px 8px; font-size: 12px; }
+    #nova-lp.nv-v2 .nv-callout i { width: 20px; }
+    #nova-lp.nv-v2 .nv-callout--l { transform: translate(calc(-100% - 9px), -50%); }
+    #nova-lp.nv-v2 .nv-callout--r { transform: translate(9px, -50%); }
     /* the sticky bar's room goes inside the dark footer, so no light strip shows under it */
     #nova-lp.nv-v2.nv-has-bar { padding-bottom: 0; }
     #nova-lp.nv-v2 .nv-footer { padding-bottom: calc(56px + 76px); }
@@ -1081,9 +1102,13 @@
               <img src="../img/full-body-pain-points.jpg" width="1600" height="1200" loading="lazy" alt="Full skeleton with the shoulder, lower back, hip and knee marked">
             </picture>
             <span class="nv-pin" style="left:42.6%;top:20.5%" aria-hidden="true"></span>
+            <span class="nv-callout nv-callout--l" style="left:42.6%;top:20.5%" aria-hidden="true"><b>Shoulder</b><i></i></span>
             <span class="nv-pin" style="left:50%;top:38.3%" aria-hidden="true"></span>
+            <span class="nv-callout nv-callout--r" style="left:50%;top:38.3%" aria-hidden="true"><b>Lower back</b><i></i></span>
             <span class="nv-pin" style="left:54.4%;top:47.3%" aria-hidden="true"></span>
+            <span class="nv-callout nv-callout--r" style="left:54.4%;top:47.3%" aria-hidden="true"><b>Hip</b><i></i></span>
             <span class="nv-pin" style="left:45.4%;top:66.8%" aria-hidden="true"></span>
+            <span class="nv-callout nv-callout--l" style="left:45.4%;top:66.8%" aria-hidden="true"><b>Knee</b><i></i></span>
           </figure>
         </div>
         <div class="c7">
