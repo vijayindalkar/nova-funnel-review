@@ -14,7 +14,7 @@
 <body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   html, body { overflow-x: clip; }
 
@@ -789,6 +789,47 @@
   @media (prefers-reduced-motion: reduce) {
     #nova-lp *, #nova-bar { transition: none !important; }
   }
+
+  /* ===== FUNNEL DESIGN (2026-11-06), loaded after base.css on every page =====
+     The practice website's type (Montserrat headlines and titles, Lato text), a white canvas with light NOVA-blue bands,
+     bolder headings and a dark footer. The landing pages add design-v2-lp.css (hero, doctor strip, full-body image,
+     step path, featured review, wave mark) plus their markup changes, which live with the build. */
+  /* the practice website's type: Montserrat for headlines and titles, Lato for text (also where the old pages used a mono face) */
+  #nova-lp.nv-v2, #nova-bar.nv-v2 {
+    --display: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    --body: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+  }
+  /* sections alternate white and a light tint of NOVA blue, so each one reads as its own block */
+  #nova-lp.nv-v2 {
+    --canvas: #FFFFFF;
+    --canvas-alt: #F2F6FB;
+    --tint: #F2F6FB;
+    --tint-2: #E6EEF8;
+    --surface: #FFFFFF;
+    --gold: #B7791F;
+  }
+  #nova-lp.nv-v2 h1, #nova-lp.nv-v2 h2, #nova-lp.nv-v2 h3 { font-weight: 600; letter-spacing: -0.015em; }
+  #nova-lp.nv-v2 h2 { font-size: clamp(28px, .9vw + 21px, 38px); line-height: 1.2; }
+  #nova-lp.nv-v2 .nv-faq h2 { font-size: clamp(24px, .6vw + 19px, 30px); line-height: 1.25; letter-spacing: -0.01em; max-width: 16ch; }
+  #nova-lp.nv-v2 .nv-eyebrow, #nova-lp.nv-v2 .nv-label { font-weight: 700; letter-spacing: .12em; }
+  #nova-lp.nv-v2 .nv-acc summary { font-weight: 700; }
+  #nova-lp.nv-v2 .nv-header { background: #FFFFFF; }
+  #nova-lp.nv-v2 .nv-stars { color: var(--gold); }
+
+  /* footer: dark */
+  #nova-lp.nv-v2 .nv-footer { background: var(--ink); border-top: 0; color: #C9D3E0; }
+  #nova-lp.nv-v2 .nv-footer b { font-weight: 600; font-size: 18px; color: #F6F8FB; }
+  #nova-lp.nv-v2 .nv-footer a { color: #E6ECF2; }
+  #nova-lp.nv-v2 .nv-footer a:hover { color: #FFFFFF; }
+  #nova-lp.nv-v2 .nv-disclaimer { color: #AEB9C8; }
+  #nova-lp.nv-v2 .nv-footer :focus-visible { outline-color: #FFFFFF; }
+
+  @media (max-width: 640px) {
+    /* the sticky bar's room goes inside the dark footer, so no light strip shows under it */
+    #nova-lp.nv-v2.nv-has-bar { padding-bottom: 0; }
+    #nova-lp.nv-v2.nv-has-bar .nv-footer { padding-bottom: calc(56px + 76px); }
+  }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -823,7 +864,7 @@
 </svg>
 
 
-<div id="nova-lp">
+<div id="nova-lp" class="nv-v2">
 
     <header class="nv-header">
     <div class="nv-wrap">
