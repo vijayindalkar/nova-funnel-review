@@ -701,6 +701,14 @@
     #nova-lp .nv-hero-grid > *, #nova-lp .nv-hero-copy > * { grid-column: 1 / -1; }
     #nova-lp .nv-hero-grid .nv-media--sm { order: 1; max-width: none; }
     #nova-lp .nv-survey-embed { margin-left: -16px; margin-right: -16px; }
+  }
+  /* GHL adds its 40px top space only when its frame is under 500px wide, and leaves about 45px less empty space under a
+     wider frame, so between 510px and 900px (one column, frame 500px or more) the card and the note go back down */
+  @media (min-width: 510px) and (max-width: 900px) {
+    #nova-lp .nv-survey-embed { margin-top: 0; }
+    #nova-lp .nv-survey-embed + .nv-survey-note { margin-top: -18px; }
+  }
+  @media (max-width: 900px) {
     #nova-lp .nv-hero-art { width: min(78vw, 420px); right: -14vw; top: 24px; opacity: .1; }
     #nova-lp .nv-problem .nv-rows, #nova-lp .nv-faq .nv-acc { margin-top: 28px; }
     #nova-lp .nv-days-top .c5 { margin-top: 28px; }
@@ -873,7 +881,7 @@
 
                         <div class="nv-card">
               <h2>Check your texts and email</h2>
-              <p>Amy just sent you a note by email and text. If now isn't a good time, reply with a time that works, and she'll call you then.</p>
+              <p>Amy is sending you a note by email and text. If now isn't a good time, reply with a time that works, and she'll call you then.</p>
               <p class="nv-small">Message and data rates may apply. Reply STOP to opt out.</p>
             </div>
           </div>
