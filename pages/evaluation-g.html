@@ -792,7 +792,7 @@
 
   /* ===== FUNNEL DESIGN (2026-11-06), loaded after base.css on every page =====
      The practice website's type (Montserrat headlines and titles, Lato text), a white canvas with light NOVA-blue bands,
-     bolder headings and a dark footer. The landing pages add design-v2-lp.css (hero, doctor strip, full-body image,
+     bolder headings and a dark footer. The landing pages add design-v2-lp.css (hero, doctor strip, pain-point photo,
      step path, featured review, wave mark) plus their markup changes, which live with the build. */
   /* the practice website's type: Montserrat for headlines and titles, Lato for text (also where the old pages used a mono face) */
   #nova-lp.nv-v2, #nova-bar.nv-v2 {
@@ -914,46 +914,25 @@
   #nova-lp.nv-v2 .nv-hero .nv-eyebrow { color: var(--blue); }
   #nova-lp.nv-v2 .nv-hero h1 { color: var(--navy); font-weight: 800; font-size: clamp(36px, 1.8vw + 24px, 52px); line-height: 1.12; letter-spacing: -0.025em; max-width: 19ch; }
 
-  /* problem: the full-body image fills the space under the heading */
-  #nova-lp.nv-v2 .nv-problem-art { margin-top: 32px; max-width: 480px; border-radius: var(--radius-card); overflow: hidden; background: #E9EFF5; }
-  #nova-lp.nv-v2 .nv-problem-art { position: relative; }
+  /* problem: one of the pain points as a photo under the heading, with a red marker where it hurts */
+  #nova-lp.nv-v2 .nv-problem-art { position: relative; margin-top: 32px; max-width: 480px; border-radius: var(--radius-card); overflow: hidden; background: #E9EFF5; }
   #nova-lp.nv-v2 .nv-problem-art img { width: 100%; height: auto; }
-  #nova-lp.nv-v2 .nv-pin {
+  #nova-lp.nv-v2 .nv-hurt {
     position: absolute;
-    width: 14px;
-    height: 14px;
-    border: 2px solid #FFFFFF;
+    width: 18px;
+    height: 18px;
+    border: 3px solid #FFFFFF;
     border-radius: 50%;
-    background: var(--blue);
-    box-shadow: 0 0 0 6px rgba(22, 103, 196, .2);
+    background: #E02424;
+    box-shadow: 0 0 0 7px rgba(224, 36, 36, .3), 0 0 26px 12px rgba(224, 36, 36, .4);
     transform: translate(-50%, -50%);
   }
   @media (prefers-reduced-motion: no-preference) {
-    #nova-lp.nv-v2 .nv-pin { animation: nv-pin 2.4s ease-out infinite; }
-    #nova-lp.nv-v2 .nv-pin:nth-of-type(2) { animation-delay: .6s; }
-    #nova-lp.nv-v2 .nv-pin:nth-of-type(3) { animation-delay: 1.2s; }
-    #nova-lp.nv-v2 .nv-pin:nth-of-type(4) { animation-delay: 1.8s; }
+    #nova-lp.nv-v2 .nv-hurt::after { content: ''; position: absolute; inset: -3px; border: 2px solid rgba(224, 36, 36, .75); border-radius: 50%; animation: nv-hurt 1.8s ease-out infinite; }
   }
-  /* joint names with an arrow to each marker */
-  #nova-lp.nv-v2 .nv-callout { position: absolute; display: flex; align-items: center; white-space: nowrap; pointer-events: none; }
-  #nova-lp.nv-v2 .nv-callout--l { transform: translate(calc(-100% - 12px), -50%); }
-  #nova-lp.nv-v2 .nv-callout--r { flex-direction: row-reverse; transform: translate(12px, -50%); }
-  #nova-lp.nv-v2 .nv-callout b {
-    padding: 6px 11px;
-    border-radius: 999px;
-    background: #FFFFFF;
-    box-shadow: 0 2px 10px rgba(0, 52, 127, .16);
-    font: 700 13px/1.1 var(--body);
-    letter-spacing: .02em;
-    color: var(--navy);
-  }
-  #nova-lp.nv-v2 .nv-callout i { position: relative; display: block; width: 36px; height: 2px; background: var(--navy); }
-  #nova-lp.nv-v2 .nv-callout i::after { content: ''; position: absolute; top: 50%; transform: translateY(-50%); border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
-  #nova-lp.nv-v2 .nv-callout--l i::after { right: -2px; border-left: 8px solid var(--navy); }
-  #nova-lp.nv-v2 .nv-callout--r i::after { left: -2px; border-right: 8px solid var(--navy); }
-  @keyframes nv-pin {
-    0% { box-shadow: 0 0 0 0 rgba(22, 103, 196, .35); }
-    70%, 100% { box-shadow: 0 0 0 12px rgba(22, 103, 196, 0); }
+  @keyframes nv-hurt {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3.4); opacity: 0; }
   }
 
   #nova-lp.nv-v2 .nv-docstrip { display: flex; align-items: center; gap: 18px; margin-top: 32px; }
@@ -1067,11 +1046,7 @@
     #nova-lp.nv-v2 .nv-docstrip-n { font-size: 18px; }
     #nova-lp.nv-v2 .nv-docstrip-t { font-size: 15px; }
     #nova-lp.nv-v2 .nv-docstrip-d { font-size: 13.5px; }
-    #nova-lp.nv-v2 .nv-pin { width: 11px; height: 11px; }
-    #nova-lp.nv-v2 .nv-callout b { padding: 5px 8px; font-size: 12px; }
-    #nova-lp.nv-v2 .nv-callout i { width: 20px; }
-    #nova-lp.nv-v2 .nv-callout--l { transform: translate(calc(-100% - 9px), -50%); }
-    #nova-lp.nv-v2 .nv-callout--r { transform: translate(9px, -50%); }
+    #nova-lp.nv-v2 .nv-hurt { width: 15px; height: 15px; }
   }
 
   /* ===== LAYOUT ROUND 7 (2026-11-06): landing pages, after design-v2-lp.css =====
@@ -1293,17 +1268,10 @@
           <h2>You've been working around joint or back pain for a while now.</h2>
           <figure class="nv-problem-art">
             <picture>
-              <source type="image/webp" srcset="../img/full-body-pain-points.webp">
-              <img src="../img/full-body-pain-points.jpg" width="1600" height="1200" loading="lazy" alt="Full skeleton with the shoulder, lower back, hip and knee marked">
+              <source type="image/webp" srcset="../img/pain-pickleball-knee.webp">
+              <img src="../img/pain-pickleball-knee.jpg" width="1200" height="896" loading="lazy" alt="A man sitting out a pickleball game, holding his sore knee">
             </picture>
-            <span class="nv-pin" style="left:42.6%;top:20.5%" aria-hidden="true"></span>
-            <span class="nv-callout nv-callout--l" style="left:42.6%;top:20.5%" aria-hidden="true"><b>Shoulder</b><i></i></span>
-            <span class="nv-pin" style="left:50%;top:38.3%" aria-hidden="true"></span>
-            <span class="nv-callout nv-callout--r" style="left:50%;top:38.3%" aria-hidden="true"><b>Lower back</b><i></i></span>
-            <span class="nv-pin" style="left:54.4%;top:47.3%" aria-hidden="true"></span>
-            <span class="nv-callout nv-callout--r" style="left:54.4%;top:47.3%" aria-hidden="true"><b>Hip</b><i></i></span>
-            <span class="nv-pin" style="left:45.4%;top:66.8%" aria-hidden="true"></span>
-            <span class="nv-callout nv-callout--l" style="left:45.4%;top:66.8%" aria-hidden="true"><b>Knee</b><i></i></span>
+            <span class="nv-hurt" style="left:38.6%;top:52%" aria-hidden="true"></span>
           </figure>
         </div>
         <div class="c7">
