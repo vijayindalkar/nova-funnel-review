@@ -851,8 +851,29 @@
   #nova-lp.nv-v2 .nv-find-photo img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 55%; }
   #nova-lp.nv-v2 .nv-find-card { display: flex; flex-direction: column; justify-content: center; }
 
+  /* the two doctor videos: a tinted overlay with a play button and "Watch this", gone once the video starts */
+  #nova-lp.nv-v2 .nv-video--vsl .nv-play { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+    background: linear-gradient(180deg, rgba(0, 32, 80, .30) 0%, rgba(0, 32, 80, .62) 100%); }
+  #nova-lp.nv-v2 .nv-video--vsl .nv-play-icon { width: 84px; height: 84px; background: #FFFFFF; color: var(--blue);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, .22), 0 12px 32px rgba(0, 0, 0, .3); }
+  #nova-lp.nv-v2 .nv-play-text { font: 700 clamp(20px, 1vw + 14px, 26px)/1.1 var(--display); letter-spacing: -0.01em; color: #FFFFFF;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, .35); }
+  @media (prefers-reduced-motion: no-preference) {
+    #nova-lp.nv-v2 .nv-video--vsl .nv-play-icon { animation: nv-watch 2.6s ease-out infinite; }
+  }
+  @keyframes nv-watch {
+    0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, .45), 0 12px 32px rgba(0, 0, 0, .3); }
+    70%, 100% { box-shadow: 0 0 0 18px rgba(255, 255, 255, 0), 0 12px 32px rgba(0, 0, 0, .3); }
+  }
+
+  /* pre-evaluation: headline and intro on the left, the video on the right */
+  #nova-lp.nv-v2 .nv-watch { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 4vw, 56px); align-items: center; }
+  #nova-lp.nv-v2 .nv-watch-copy h1 { max-width: 14ch; }
+
   @media (max-width: 900px) {
     #nova-lp.nv-v2 .nv-next--row { grid-template-columns: 1fr; gap: 14px; }
+    #nova-lp.nv-v2 .nv-watch { grid-template-columns: 1fr; gap: 28px; }
+    #nova-lp.nv-v2 .nv-video--vsl .nv-play-icon { width: 68px; height: 68px; }
     #nova-lp.nv-v2 .nv-doc-compact .nv-grid { grid-template-columns: 1fr; }
     #nova-lp.nv-v2 .nv-doc-compact .nv-photo { max-width: 220px; margin-bottom: 24px; }
     #nova-lp.nv-v2 .nv-find-grid { grid-template-columns: 1fr; }
@@ -937,13 +958,15 @@
 
         <section class="nv-page-head nv-anchor" id="watch" style="padding-bottom:var(--section-y)">
       <div class="nv-wrap">
-        <h1 class="nv-h1-page" style="margin-top:0">Your Joint &amp; Spine Evaluation: here's how to get ready.</h1>
-        <p class="nv-lede" style="margin-top:16px">Watch this short video from Dr. Anil Chenthitta before you come in, so you know what to expect.</p>
-        <div class="nv-grid" style="margin-top:32px">
-          <div class="c8">
-            <div class="nv-video" data-nv-video="before-first-visit">
+        <div class="nv-watch">
+          <div class="nv-watch-copy">
+            <h1 class="nv-h1-page" style="margin-top:0">Your Joint &amp; Spine Evaluation: here's how to get ready.</h1>
+            <p class="nv-lede" style="margin-top:16px">Watch this short video from Dr. Anil Chenthitta before you come in, so you know what to expect.</p>
+          </div>
+          <div class="nv-watch-video">
+            <div class="nv-video nv-video--vsl" data-nv-video="before-first-visit">
               <video preload="none" playsinline poster="../img/vsl2-poster.jpg" src="../video/vsl2-before-first-visit.mp4"></video>
-              <button type="button" class="nv-play" aria-label="Play the video from Dr. Chenthitta about your visit"><span class="nv-play-icon"><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-play"/></svg></span></button>
+              <button type="button" class="nv-play" aria-label="Play the video from Dr. Chenthitta about your visit"><span class="nv-play-icon"><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-play"/></svg></span><span class="nv-play-text">Watch this</span></button>
               <span class="nv-video-label">Video &middot; Dr. Anil Chenthitta</span>
             </div>
             <p class="nv-results" style="margin-top:12px">Individual results vary.</p>
