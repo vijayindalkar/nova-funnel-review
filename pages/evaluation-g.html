@@ -1073,6 +1073,125 @@
     #nova-lp.nv-v2 .nv-callout--l { transform: translate(calc(-100% - 9px), -50%); }
     #nova-lp.nv-v2 .nv-callout--r { transform: translate(9px, -50%); }
   }
+
+  /* ===== LAYOUT ROUND 7 (2026-11-06): landing pages, after design-v2-lp.css =====
+     Less empty space with every section where it was: one tighter spacing scale, the trust points and the Google rating
+     beside the survey, review cards of equal width, cards where a column ran short, and the call line and a button in
+     the empty column beside the FAQ. */
+
+  /* one spacing scale: 80px between sections on desktop (was up to 128px), 48px on phones */
+  #nova-lp.nv-v2 { --section-y: clamp(48px, 5.5vw, 80px); }
+  #nova-lp.nv-v2 .nv-fit, #nova-lp.nv-v2 .nv-faq { padding: var(--section-y) 0; }
+  #nova-lp.nv-v2 .nv-final { padding: clamp(56px, 6.5vw, 96px) 0; }
+  #nova-lp.nv-v2 .nv-how { margin-top: clamp(40px, 4.5vw, 64px); }
+  #nova-lp.nv-v2 .nv-hero { padding: clamp(32px, 4.5vw, 64px) 0 clamp(40px, 4.5vw, 64px); }
+
+  /* hero: the trust points sit under the doctor strip, beside the survey (the strip already names his board
+     certification, so that point shows only on phones, where the strip is further away) */
+  #nova-lp.nv-v2 .nv-trust .nv-stars { gap: 1px; }
+  #nova-lp.nv-v2 .nv-trust .nv-stars .nv-ico { width: 15px; height: 15px; color: #FBBC04; }
+  #nova-lp.nv-v2 .nv-trust-g { gap: 8px; font-weight: 700; color: var(--ink); }
+  @media (min-width: 901px) {
+    #nova-lp.nv-v2 .nv-hero-grid { grid-template-rows: auto 1fr; }
+    #nova-lp.nv-v2 .nv-hero-grid > .nv-hero-copy { grid-row: 1; }
+    #nova-lp.nv-v2 .nv-hero-grid > .nv-hero-form { grid-row: 1 / span 2; }
+    #nova-lp.nv-v2 .nv-hero-grid > .nv-trust { grid-row: 2; grid-column: 1 / span 7; align-self: start; margin-top: 28px; padding: 20px 0 0; border-bottom: 0; gap: 12px 28px; }
+    #nova-lp.nv-v2 .nv-hero-grid > .nv-trust > li:first-child { display: none; }
+    #nova-lp.nv-v2 .nv-hero-grid > .nv-trust > .nv-trust-g { order: -1; }
+  }
+  @media (min-width: 1100px) {
+    #nova-lp.nv-v2 .nv-hero-grid > .nv-trust { grid-column: 1; }
+  }
+  /* phones and tablets: the first question comes right after the lede, then the doctor strip and the trust points */
+  @media (max-width: 900px) {
+    #nova-lp.nv-v2 .nv-hero { padding-bottom: 0; }
+    #nova-lp.nv-v2 .nv-hero-grid .nv-docstrip { order: 1; margin-top: 28px; }
+    #nova-lp.nv-v2 .nv-hero-grid > .nv-trust { order: 2; margin-top: 28px; }
+  }
+
+  /* next 90 days: the four outcomes in a white card, level with the heading and intro */
+  #nova-lp.nv-v2 .nv-days-top { align-items: center; }
+  #nova-lp.nv-v2 .nv-outcomes { padding: 6px 26px; background: #FFFFFF; border: 1px solid var(--hairline); border-radius: var(--radius-card); box-shadow: 0 1px 2px rgba(0, 52, 127, .05); }
+  #nova-lp.nv-v2 .nv-outcomes li { padding: 14px 0; }
+  #nova-lp.nv-v2 .nv-outcomes li + li { border-top: 1px solid var(--hairline); }
+  #nova-lp.nv-v2 .nv-outcomes + .nv-results { margin-top: 12px; }
+
+  /* doctor: a narrower portrait column, so the photo stops well short of twice the height of the text */
+  @media (min-width: 901px) {
+    #nova-lp.nv-v2 .nv-doctor .nv-grid > .c5 { grid-column: span 4; }
+    #nova-lp.nv-v2 .nv-doctor .nv-grid > .c7 { grid-column: span 8; }
+    #nova-lp.nv-v2 .nv-doctor-photo { max-width: none; }
+  }
+  /* phones and tablets: a landscape crop of the portrait, head to chest */
+  @media (max-width: 900px) {
+    #nova-lp.nv-v2 .nv-doctor-photo { max-width: none; aspect-ratio: 4 / 3; margin-bottom: 28px; }
+    #nova-lp.nv-v2 .nv-doctor-photo img { object-position: 50% 14%; }
+  }
+
+  /* reviews: the Google rating as a badge beside the heading */
+  #nova-lp.nv-v2 .nv-rev-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 32px; }
+  #nova-lp.nv-v2 .nv-reviews h2 { margin-top: 0; }
+  #nova-lp.nv-v2 .nv-gbadge { display: inline-flex; align-items: center; gap: 14px; padding: 12px 22px 12px 16px; background: #FFFFFF; border: 1px solid #DADCE0; border-radius: 12px; box-shadow: 0 1px 2px rgba(60, 64, 67, .08); }
+  #nova-lp.nv-v2 .nv-gbadge-g { flex: none; width: 28px; height: 28px; }
+  #nova-lp.nv-v2 .nv-gbadge b { font: 700 32px/1 var(--display); letter-spacing: -0.02em; color: #202124; }
+  #nova-lp.nv-v2 .nv-gbadge-r { display: flex; flex-direction: column; gap: 5px; font-size: 14px; line-height: 1.2; color: #5F6368; }
+  #nova-lp.nv-v2 .nv-gbadge .nv-stars .nv-ico { width: 17px; height: 17px; }
+  #nova-lp.nv-v2 .nv-reviews .nv-bento { margin-top: 28px; }
+  /* four reviews 2 by 2 at equal width, so the short first review no longer leaves half its card empty */
+  @media (min-width: 901px) {
+    #nova-lp.nv-v2 .nv-bento--even:not(:has(.nv-pvid)) .nv-review { grid-column: span 3; }
+  }
+
+  /* check: both columns level, "What happens when Amy calls" on a tinted card, the call line under the button */
+  #nova-lp.nv-v2 .nv-check .nv-grid { align-items: center; }
+  #nova-lp.nv-v2 .nv-amy { padding: 26px 28px 8px; background: var(--tint); border-radius: var(--radius-card); }
+  #nova-lp.nv-v2 .nv-amy .nv-rows { margin-top: 10px; }
+  #nova-lp.nv-v2 .nv-amy .nv-rows > li:last-child { border-bottom: 0; }
+  #nova-lp.nv-v2 .nv-check .nv-survey-note + .nv-call-line { margin-top: 8px; }
+  @media (max-width: 900px) {
+    #nova-lp.nv-v2 .nv-amy { margin-top: 32px; padding: 22px 20px 6px; }
+  }
+  @media (max-width: 640px) {
+    #nova-lp.nv-v2 .nv-check .nv-btn { width: 100%; }
+  }
+
+  /* not the right fit: the icon beside the reason instead of above it */
+  #nova-lp.nv-v2 .nv-fit-grid { margin-top: 28px; }
+  #nova-lp.nv-v2 .nv-fit-grid li { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 16px; align-content: start; padding: 24px; }
+  #nova-lp.nv-v2 .nv-fit-ico { grid-row: 1 / span 2; width: 44px; height: 44px; margin: 0; }
+  #nova-lp.nv-v2 .nv-fit-grid b, #nova-lp.nv-v2 .nv-fit-grid span { grid-column: 2; }
+  #nova-lp.nv-v2 .nv-fit-grid b { padding-top: 2px; }
+  #nova-lp.nv-v2 .nv-fit-grid span { margin-top: 6px; }
+  @media (max-width: 900px) {
+    #nova-lp.nv-v2 .nv-fit-grid li { padding: 20px; }
+  }
+
+  /* FAQ: the column under the heading gets the call line, office hours and the button (desktop; on phones the
+     final call to action right after it carries the same) */
+  #nova-lp.nv-v2 .nv-faq-help { margin-top: 28px; padding: 24px; background: var(--tint); border-radius: var(--radius-card); }
+  #nova-lp.nv-v2 .nv-faq-ico { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 14px; border-radius: 50%; background: #FFFFFF; color: var(--navy); }
+  #nova-lp.nv-v2 .nv-faq-ico .nv-ico { width: 20px; height: 20px; stroke-width: 2; }
+  #nova-lp.nv-v2 .nv-faq-help .nv-call-line { margin-top: 0; font-size: 17px; color: var(--ink); }
+  #nova-lp.nv-v2 .nv-faq-hours { margin-top: 4px; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+  #nova-lp.nv-v2 .nv-faq-help .nv-btn { width: 100%; margin-top: 20px; }
+  @media (min-width: 901px) {
+    #nova-lp.nv-v2 .nv-faq .nv-grid > .c4 { grid-column: span 5; }
+    #nova-lp.nv-v2 .nv-faq .nv-grid > .c8 { grid-column: span 7; }
+    #nova-lp.nv-v2 .nv-faq-side { position: sticky; top: calc(var(--header-h) + 24px); }
+  }
+  @media (max-width: 900px) {
+    #nova-lp.nv-v2 .nv-faq-help { display: none; }
+  }
+
+  /* final call to action: the Google rating and the call line under the button */
+  #nova-lp.nv-v2 .nv-motif { margin-bottom: 24px; }
+  #nova-lp.nv-v2 .nv-final p.nv-final-proof { display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; font-size: 15.5px; font-weight: 700; line-height: 1.4; color: var(--ink); }
+  #nova-lp.nv-v2 .nv-final-proof .nv-stars { gap: 1px; color: #FBBC04; }
+  #nova-lp.nv-v2 .nv-final-proof .nv-stars .nv-ico { width: 16px; height: 16px; }
+  #nova-lp.nv-v2 .nv-final p.nv-call-line { margin-top: 4px; font-size: 15.5px; }
+  @media (max-width: 640px) {
+    #nova-lp.nv-v2 .nv-final p.nv-final-proof { flex-direction: column; gap: 6px; }
+  }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -1157,14 +1276,14 @@
             </div>
             <p class="nv-call-line">Questions first? Call Amy at <a href="tel:+15715103815" data-nv-phone data-nv-loc="hero"><span>571-510-3815</span></a>.</p>
           </div>
-        </div>
 
                 <ul class="nv-trust">
           <li><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-badge"/></svg>Board-certified, fellowship-trained pain and spine physician</li>
           <li><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-scan"/></svg>Treatment placed with image guidance</li>
           <li><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-pin"/></svg>Eight years in Lansdowne</li>
-          <li><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg>4.8 on Google</li>
+          <li class="nv-trust-g"><span class="nv-stars" aria-hidden="true"><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg></span>4.8 on Google</li>
         </ul>
+        </div>
       </div>
     </section>
 
@@ -1275,9 +1394,11 @@
 
         <section class="nv-section nv-reviews nv-anchor-72" id="reviews">
       <div class="nv-wrap">
-        <p class="nv-eyebrow">&#9733; 4.8 from 100+ Google reviews</p>
-        <h2>What patients say</h2>
-        <div class="nv-bento nv-bento--swipe nv-bento--feature">
+        <div class="nv-rev-head">
+          <h2>What patients say</h2>
+          <p class="nv-gbadge"><svg class="nv-gbadge-g" role="img" aria-label="Google"><use href="#nv-i-google"/></svg><b>4.8</b><span class="nv-gbadge-r"><span class="nv-stars" role="img" aria-label="4.8 out of 5 stars"><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg></span><span>from 100+ Google reviews</span></span></p>
+        </div>
+        <div class="nv-bento nv-bento--swipe nv-bento--feature nv-bento--even">
           <div class="nv-bento-revs">
             <figure class="nv-review nv-review--a nv-greview">
               <figcaption class="nv-greview-head"><span class="nv-greview-av" style="background:#795548" aria-hidden="true">J</span><span class="nv-greview-who"><b>James S.</b><span>Google review</span></span><svg class="nv-greview-g" role="img" aria-label="Google"><use href="#nv-i-google"/></svg></figcaption>
@@ -1312,6 +1433,7 @@
           <p class="nv-lede">When Amy calls, she'll already have your answers, so you won't have to repeat yourself.</p>
           <a class="nv-btn nv-cta" href="#check" data-nv-loc="check">See if I'm a candidate</a>
           <p class="nv-survey-note">Six short questions. If you're a fit, Amy from Dr. Chenthitta's office calls to book your evaluation.</p>
+          <p class="nv-call-line">Questions first? Call Amy at <a href="tel:+15715103815" data-nv-phone data-nv-loc="check"><span>571-510-3815</span></a>.</p>
         </div>
         <div class="c5 nv-amy">
           <p class="nv-label">What happens when Amy calls</p>
@@ -1337,7 +1459,15 @@
 
         <section class="nv-faq">
       <div class="nv-wrap nv-grid" style="align-items:start">
-        <div class="c4"><h2>Questions people ask before they book</h2></div>
+        <div class="c4 nv-faq-side">
+          <h2>Questions people ask before they book</h2>
+          <div class="nv-faq-help">
+            <span class="nv-faq-ico" aria-hidden="true"><svg class="nv-ico"><use href="#nv-i-phone"/></svg></span>
+            <p class="nv-call-line">Questions first? Call Amy at <a href="tel:+15715103815" data-nv-phone data-nv-loc="faq"><span>571-510-3815</span></a>.</p>
+            <p class="nv-faq-hours">Monday to Friday, 8:30 to 4:30</p>
+            <a class="nv-btn nv-cta" href="#check" data-nv-loc="faq">See if I'm a candidate</a>
+          </div>
+        </div>
         <div class="c8 nv-acc">
           <details>
             <summary>Is this treatment safe?<svg class="nv-ico" aria-hidden="true"><use href="#nv-i-chevron"/></svg></summary>
@@ -1373,6 +1503,8 @@
         <h2>Find out if there's an option before surgery.</h2>
         <p>Answer six short questions. If you're a fit, Amy calls to book your evaluation with Dr. Chenthitta.</p>
         <a class="nv-btn nv-cta" href="#check" data-nv-loc="final">See if I'm a candidate</a>
+        <p class="nv-final-proof"><span class="nv-stars" aria-hidden="true"><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg><svg class="nv-ico" aria-hidden="true"><use href="#nv-i-star"/></svg></span>4.8 from 100+ Google reviews</p>
+        <p class="nv-call-line">Questions first? Call Amy at <a href="tel:+15715103815" data-nv-phone data-nv-loc="final"><span>571-510-3815</span></a>.</p>
       </div>
     </section>
 
